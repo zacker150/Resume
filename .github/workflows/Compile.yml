@@ -5,6 +5,7 @@ on:
       - "main"
     paths:
       - "resume.tex"
+      - "resume/*.tex"
       - ".github/workflows/**"
 
 jobs:
