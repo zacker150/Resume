@@ -17,8 +17,8 @@
     {2026 - Present} % Date(s)
     {
       \begin{cvitems} % Description(s) of tasks/responsibilities
-        \item {Engineered the internal Software Factory that convert tickets into merge-ready PRs using webhoook-triggered coding agents, Claude and Codex reviewers on GitHub Actions, and custom agent skills}
-        \item {Built SuperApp's remote Claude Code and Codex sub-agent integration, including a Linux daemon orchestrating agents on customer machines, a dual-journal protocol for durable server-side persistence and command delivery, and frontend controls.}
+        \item {Engineered the internal Software Factory that converts tickets into merge-ready PRs using webhook-triggered coding agents, Claude and Codex reviewers on GitHub Actions, and custom agent skills}
+        \item {Built SuperApp's remote Claude Code and Codex sub-agent integration, including a Linux daemon orchestrating agents on customer machines, a dual-journal protocol for durable server-side persistence and command delivery, and frontend controls}
         % On a high level, I created a daemon that runs on the user's Linux vms. After pairing with SuperApp, users can directly control claude and codex sessions using the `/codex` or `/claude` slash commands, and the SuperApp agent can delegate work to claude/codex agents as a subagent. This is basically our answer to Calude Tag.         
         \item {Pioneered agentic coding workflows by developing toolsets and techniques, writing agent skills, and sharing best practices, increasing engineering throughput to 50-100 merged PRs per week per engineer} 
         \item {Developed 0-to-1 reproducible development environments on GCP; combined Terraform, Packer, and Caddy to standardize developer VMs with built-in AI toolchains and concurrent full-stack previews, replacing crafting.dev and allowing our engineers to code from anywhere}
