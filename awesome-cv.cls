@@ -50,6 +50,8 @@
 \RequirePackage{array}
 % Needed to handle list environment
 \RequirePackage{enumitem}
+% Keep section headings with the content that follows
+\RequirePackage{needspace}
 % Needed to handle text alignment
 \RequirePackage{ragged2e}
 % Needed to configure page layout
@@ -561,6 +563,7 @@
 % Define a section for CV
 % Usage: \cvsection{<section-title>}
 \newcommand{\cvsection}[1]{%
+  \Needspace{5\baselineskip}
   \vspace{\acvSectionTopSkip}
   \sectionstyle{#1}
   \phantomsection
@@ -589,6 +592,7 @@
 % Define an environment for cventry
 \newenvironment{cventries}{%
   \vspace{\acvSectionContentTopSkip}
+  \setlength{\parskip}{0pt}
   \begin{center}
 }{%
   \end{center}
@@ -596,16 +600,17 @@
 % Define an entry of cv information
 % Usage: \cventry{<position>}{<title>}{<location>}{<date>}{<description>}
 \newcommand*{\cventry}[5]{%
-  \vspace{-2.0mm}
+  \par\addvspace{1mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
+  \noindent%
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
     \ifempty{#2#3}
       {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
       {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
       \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
     \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
-  \end{tabular*}%
+  \end{tabular*}\par
 }
 
 % Define an environment for cvsubentry
@@ -678,7 +683,6 @@
 }{%
   \end{itemize}
   \end{justify}
-  \vspace{-4.0mm}
 }
 
 
