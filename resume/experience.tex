@@ -12,13 +12,19 @@
 
   \cventry
     {Senior Software Engineer} % Job title
-    {Instabase Inc.} % Organization
+    {SuperApp/Instabase Inc.} % Organization
     {San Francisco, CA} % Location
     {2026 - Present} % Date(s)
     {
       \begin{cvitems} % Description(s) of tasks/responsibilities
-        \item {Led Development of secure code execution sandbox}
-        \item {Led Development of SuperApp CI/CD on GitHub Actions, including infastructure provisioning via Terraform}
+        \item {Engineered SuperApp's internal Software Factory, utilizing T3 Code webhooks, Claude and Codex reviewers on GitHub Actions, and custom agent skills to autonomously convert tickets into merge-ready PRs}
+        \item {Pioneered agentic coding workflows by developing toolsets and techniques, writing agent skills, and sharing best practices, increasing engineering throughput to 50-100 PRs per week} 
+        \item {Developed 0-to-1 reproducible development environments on GCP; combined Terraform, Packer, and Caddy to standardize developer VMs with built-in AI toolchains and concurrent full-stack previews, replacing crafting.dev and allowing our engineers to code from anywhere}
+        % On a high level, I created a GitHub actions pipeline that allows our engineers to create a standardized developer VM (which is managed by Terraform) similar to GitHub Codespaces. These VMs have a packer image with Claude, Codex, T3, and our development toolchain baked in. Users can selectively expose ports using a `devenv expose` command (which updates the caddy proxy). On first login, a script automatically clones our main repo, prompts the user to login to claude and codex, and sets up a T3 server, exposes it over the NAT, and starts the T3 pairing proccess. 
+        \item {Engineered a full-stack integration for remote coding agents in SuperApp, building a custom Linux daemon that orchestrates Claude Code and Codex agents on customer machines, a dual-journal protocol for durable server-side persistence and command delivery, and the frontend UIs to control it all}
+        % On a high level, I created a daemon that runs on the user's Linux vms. After pairing with SuperApp, users can directly control claude and codex sessions using the `/codex` or `/claude` slash commands, and the SuperApp agent can delegate work to claude/codex agents as a subagent. This is basically our answer to Calude Tag. 
+        \item {Delivered 0-to-1 service for securely executing AI-generated code using nested gVisor on Cloud Run}
+        
       \end{cvitems}
     }
 
@@ -29,7 +35,12 @@
     {2022 - 2026} % Date(s)
     {
       \begin{cvitems} % Description(s) of tasks/responsibilities
-        \item {Led Development of AI Hub billing system, including integration with Metronome and Stripe}
+        \item {Led a team of 3 to to consolidate 100+ fragmented Python modules into the standard src layout and modernize our toolchain, enabling the use of off-the-shelf tools, and reducing CI time from 2 hours to 10 minutes}
+        % Previously, our Python modules was split across a hundred folders that were individually tested and combined at build time using bazel and makefiles. This resulted in a ton of issues with standard tools and resulted in mypy being run many times in a build.
+        % I led a team of 3 that merged these into the standard Python src layout, upgraded to pytest with parallelism, migrated from mypyt to pyrefly, and re-implemented our CI pipelines in GitHub actions. This reduced CI time from 2 hours to 10 minutes and 
+        % allowed engineers to use off-the shelf IDEs and language servers.
+        \item {Engineered the AI Hub billing system, including integration with Metronome and Stripe and building out the subscription state machine}
+        \item {Developed file retention retention for compliance with GDPR}
         \item {Developed support for Google Cloud Storage}
       \end{cvitems}
     }
