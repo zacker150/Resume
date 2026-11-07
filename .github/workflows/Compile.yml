@@ -11,10 +11,12 @@ on:
 jobs:
   build_latex:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        run: echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
 
       - name: Checkout
         uses: actions/checkout@v7
@@ -24,31 +26,21 @@ jobs:
         with:
           root_file: resume.tex
           latexmk_use_xelatex: true
-              
+
       - uses: actions/upload-artifact@v7
         with:
           name: Resume_${{ steps.date.outputs.date }}
           path: resume.pdf
           archive: false
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+      - name: Create draft release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-        with:
-          tag_name: ${{ steps.date.outputs.date }}
-          release_name: ${{ steps.date.outputs.date }}
-          draft: true
-          prerelease: false
-
-      - name: Upload Release
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: resume.pdf
-          asset_name: resume_${{ steps.date.outputs.date }}.pdf
-          asset_content_type: application/pdf
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DATE: ${{ steps.date.outputs.date }}
+        run: |
+          cp resume.pdf "resume_${DATE}.pdf"
+          gh release create "$DATE" "resume_${DATE}.pdf" \
+            --draft \
+            --title "$DATE" \
+            --target "$GITHUB_SHA" \
+            --repo "$GITHUB_REPOSITORY"
